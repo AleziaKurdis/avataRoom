@@ -93,8 +93,8 @@
             avatar = {
                 "name": bookmarkName,
                 "url": avatarBookmarkList[bookmarkName].avatarUrl,
-                "scale": avatarBookmarkList[bookmarkName].avatarScale;
-                "entities": avatarBookmarkList[bookmarkName].avatarEntites;
+                "scale": avatarBookmarkList[bookmarkName].avatarScale,
+                "entities": avatarBookmarkList[bookmarkName].avatarEntites
             };
             avatars.push(avatar);
             i++;

@@ -113,12 +113,12 @@
             var rotation = Quat.fromVec3Radians({"x": 0, "y": currentAngle, "z": 0});
             var position = {"x": positionZero.x + (Math.cos(currentAngle) * radius), "y": positionZero.y, "z": positionZero.z + (Math.sin(currentAngle) * radius)};
             
-            var parkId = Entities.addEntity({
+            var id = Entities.addEntity({
                 "type": "Model",
                 "name": avatars[i].name,
                 "position": position,
                 "rotation": rotation,
-                "locked": true,
+                "locked": false,
                 "grab": {
                     "grabbable": false
                 },
@@ -128,7 +128,12 @@
                 "useOriginalPivot": true                
             }, "domain");
             
+            var properties = Entities.getEntityProperties(id, ["naturalDimensions"]);
             
+            Entities.editEntity(id, {
+                "dimensions": Vec3.multiply( avatars[i].scale, properties.naturalDimensions ),
+                "locked": true
+            });
             
         }
         

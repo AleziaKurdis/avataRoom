@@ -86,7 +86,7 @@
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
         
-        for (let bookmarkName in avatarBookmarkList) {
+        for (var bookmarkName in avatarBookmarkList) {
             print("name: " + bookmarkName);
             print("data: " + JSON.stringify(avatarBookmarkList[bookmarkName]));
             

@@ -85,7 +85,7 @@
 
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        
+        print("GEN-VERSION-100");
         for (var bookmarkName of avatarBookmarkList) {
             print("name: " + bookmarkName);
             print("data: " + JSON.stringify(avatarBookmarkList[bookmarkName]));

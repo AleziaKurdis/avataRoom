@@ -25,7 +25,7 @@
         text: APP_NAME,
         icon: APP_ICON_INACTIVE,
         activeIcon: APP_ICON_ACTIVE,
-        sortOrder: 8
+        sortOrder: 4
     });
 
 

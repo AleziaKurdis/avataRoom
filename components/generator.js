@@ -103,7 +103,7 @@
         
         var angle = (1/avatars.length) * 2 * Math.PI;
         var requiredPerimeter = avatars.length * 3;
-        var radius = requiredPerimeter / (2 * Math.PI); < 4
+        var radius = requiredPerimeter / (2 * Math.PI);
         if (radius < 4) {
             radius = 4;
         }

@@ -128,6 +128,8 @@
                 "useOriginalPivot": true                
             }, "domain");
             
+            sleep(1000);
+            
             var properties = Entities.getEntityProperties(id, ["naturalDimensions"]);
             
             Entities.editEntity(id, {
@@ -138,6 +140,14 @@
         }
         
         
+    }
+
+    function sleep(milliseconds) {
+            var date = Date.now();
+            var currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
     }
 
     function generateWorld() {

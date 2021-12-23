@@ -38,7 +38,6 @@
     var thisEntity = Uuid.NULL;
     var positionZero;
     
-    var avatarBookmarkList;
     
     //var placeHistorySettingValue;
     //var placeHistorySettingName = "3D_GOTO_PLACES_HISTORY";
@@ -60,9 +59,8 @@
             var properties = Entities.getEntityProperties(entityID, ["position"]);
             positionZero = properties.position;
             
-            //Load here
-            avatarBookmarkList = AvatarBookmarks.getBookmarks();
-            print("LIST: " + JSON.stringify(avatarBookmarkList));
+            generateWorld();
+            generateAvatars();
             
             if (airSound.downloaded) {
                 playAirSound();
@@ -85,6 +83,20 @@
         });
     }
 
+    function generateAvatars() { 
+        var avatarBookmarkList = AvatarBookmarks.getBookmarks();
+        
+        for (let bookmarkName in avatarBookmarkList) {
+            print("name: " + bookmarkName);
+            print("data: " + JSON.stringify(avatarBookmarkList[bookmarkName]));
+            
+        }
+        
+    }
+
+    function generateWorld() {
+        
+    }
 /*    
     function getPlacesContent(apiUrl) {
         placesHttpRequest = new XMLHttpRequest();

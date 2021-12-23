@@ -85,7 +85,7 @@
 
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-105");
+        print("GEN-VERSION-110");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -125,7 +125,8 @@
                 "shapeType": "none",
                 //"script": ROOT + "areas/area_" + placeArea + ".js",
                 "modelURL": avatars[i].url,
-                "useOriginalPivot": true                
+                "useOriginalPivot": true,
+                "visible": false                
             }, "domain");
             
             sleep(1000);
@@ -134,7 +135,8 @@
             
             Entities.editEntity(id, {
                 "dimensions": Vec3.multiply( avatars[i].scale, properties.naturalDimensions ),
-                "locked": true
+                "locked": true,
+                "visible": true
             });
             
         }

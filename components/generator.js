@@ -94,7 +94,7 @@
                 "name": bookmarkName,
                 "url": avatarBookmarkList[bookmarkName].avatarUrl,
                 "scale": avatarBookmarkList[bookmarkName].avatarScale,
-                "entities": avatarBookmarkList[bookmarkName].avatarEntites
+                "entities": avatarBookmarkList[bookmarkName].avatarEntities
             };
             avatars.push(avatar);
             i++;

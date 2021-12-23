@@ -85,7 +85,7 @@
 
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-102");
+        print("GEN-VERSION-105");
         var avatars = [];
         var i = 0;
         var avatar;

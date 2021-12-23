@@ -85,12 +85,53 @@
 
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-101");
+        print("GEN-VERSION-102");
+        var avatars = [];
+        var i = 0;
+        var avatar;
         for (var bookmarkName in avatarBookmarkList) {
-            print("name: " + bookmarkName);
-            print("data: " + JSON.stringify(avatarBookmarkList[bookmarkName]));
+            avatar = {
+                "name": bookmarkName,
+                "url": avatarBookmarkList[bookmarkName].avatarUrl,
+                "scale": avatarBookmarkList[bookmarkName].avatarScale;
+                "entities": avatarBookmarkList[bookmarkName].avatarEntites;
+            };
+            avatars.push(avatar);
+            i++;
+        }
+        avatars.sort(sortName);
+        
+        var angle = (1/avatars.length) * 2 * Math.PI;
+        var requiredPerimeter = avatars.length * 3;
+        var radius = requiredPerimeter / (2 * Math.PI); < 4
+        if (radius < 4) {
+            radius = 4;
+        }
+        
+        for (i = 0; i < avatars.length; i++ ) {
+            var currentAngle = i * angle;
+            var rotation = Quat.fromVec3Radians({"x": 0, "y": currentAngle, "z": 0});
+            var position = {"x": positionZero.x + (Math.cos(currentAngle) * radius), "y": positionZero.y, "z": positionZero.z + (Math.sin(currentAngle) * radius)};
+            
+            var parkId = Entities.addEntity({
+                "type": "Model",
+                "name": avatars[i].name,
+                "position": position,
+                "rotation": rotation,
+                "locked": true,
+                "grab": {
+                    "grabbable": false
+                },
+                "shapeType": "none",
+                //"script": ROOT + "areas/area_" + placeArea + ".js",
+                "modelURL": avatars[i].url,
+                "useOriginalPivot": true                
+            }, "domain");
+            
+            
             
         }
+        
         
     }
 
@@ -238,7 +279,7 @@
         
         portalList.sort(sortOrder);
     }
-*/
+
 
 
     function getListFromArray(dataArray) {
@@ -257,18 +298,19 @@
         
         return dataList;
     }
+*/
 
-    function sortOrder(a, b) {
-        var orderA = a.order.toUpperCase();
-        var orderB = b.order.toUpperCase();
-        if (orderA > orderB) {
+    function sortName(a, b) {
+        var nameA = a.name.toUpperCase();
+        var nameB = b.name.toUpperCase();
+        if (nameA > nameB) {
             return 1;    
-        } else if (orderA < orderB) {
+        } else if (nameA < nameB) {
             return -1;
         }
-        if (a.order > b.order) {
+        if (a.name > b.name) {
             return 1;    
-        } else if (a.order < b.order) {
+        } else if (a.name < b.name) {
             return -1;
         }
         return 0;

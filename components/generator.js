@@ -90,7 +90,7 @@
         
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-240");
+        print("GEN-VERSION-250");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -107,7 +107,7 @@
         avatars.sort(sortName);
         
         var angle = (1/avatars.length) * 2 * Math.PI;
-        var requiredPerimeter = avatars.length * 3;
+        var requiredPerimeter = avatars.length * 2;
         var radius = requiredPerimeter / (2 * Math.PI);
         if (radius < 3) {
             radius = 3;

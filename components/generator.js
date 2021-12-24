@@ -90,7 +90,7 @@
         
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-190");
+        print("GEN-VERSION-200");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -152,7 +152,7 @@
                 var properties = Entities.getEntityProperties(avatarModelEntityIDs[processAvatar], ["naturalDimensions"]);
                 
                 Entities.editEntity(avatarModelEntityIDs[processAvatar], {
-                    "dimensions": Vec3.multiply(avatarModelScale[processAvatar].scale, properties.naturalDimensions ),
+                    "dimensions": Vec3.multiply(avatarModelScale[processAvatar], properties.naturalDimensions ),
                     "locked": true,
                     "visible": true
                 }); 

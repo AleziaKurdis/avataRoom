@@ -89,7 +89,7 @@
         
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-170");
+        print("GEN-VERSION-180");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -108,8 +108,8 @@
         var angle = (1/avatars.length) * 2 * Math.PI;
         var requiredPerimeter = avatars.length * 3;
         var radius = requiredPerimeter / (2 * Math.PI);
-        if (radius < 4) {
-            radius = 4;
+        if (radius < 3) {
+            radius = 3;
         }
         
         for (i = 0; i < avatars.length; i++ ) {
@@ -144,7 +144,7 @@
 
     function myTimer(deltaTime) {
         if (!avatarModelLoaded[processAvatar]) {
-            if (Entities.isLoaded(avatarModelEntityIDs[processAvatar]) {
+            if (Entities.isLoaded(avatarModelEntityIDs[processAvatar])) {
                 avatarModelLoaded[processAvatar] = true;
 
                 var properties = Entities.getEntityProperties(avatarModelEntityIDs[processAvatar], ["naturalDimensions"]);

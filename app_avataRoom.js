@@ -39,7 +39,7 @@
             button.editProperties({
                 isActive: false
             });
-        }, 3000);
+        }, 2000);
         
 
     }

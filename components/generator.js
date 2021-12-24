@@ -69,6 +69,7 @@
                 airSound.ready.connect(onSoundReady);
             }
             
+            sleep(2000);
             generateAvatars();
         }
     };    

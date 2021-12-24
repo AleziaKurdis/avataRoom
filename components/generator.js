@@ -98,7 +98,7 @@
     
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-140");
+        print("GEN-VERSION-150");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -141,9 +141,9 @@
                 "useOriginalPivot": true,
                 "visible": false                
             }, "domain");
-            
+            print("LOADED BEFORE: " + Entities.isLoaded(id));
             sleep(2000);
-            
+            print("LOADED AFTER: " + Entities.isLoaded(id));
             var properties = Entities.getEntityProperties(id, ["naturalDimensions"]);
             
             Entities.editEntity(id, {

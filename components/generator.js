@@ -90,7 +90,7 @@
         
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-295");
+        print("GEN-VERSION-297");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -130,7 +130,7 @@
                 "shapeType": "none",
                 //"script": ROOT + "areas/area_" + placeArea + ".js",
                 "modelURL": avatars[i].url,
-                "useOriginalPivot": false,
+                "useOriginalPivot": true,
                 "visible": false                
             }, "domain");
             

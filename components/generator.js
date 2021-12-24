@@ -54,19 +54,22 @@
         if (location.protocol.substr(0, 4) === "http") {
             thisEntity = entityID;
             
+            preloadAvatars();
+            
             airSound = SoundCache.getSound(hecateAirSoundUrl);
             
             var properties = Entities.getEntityProperties(entityID, ["position"]);
             positionZero = properties.position;
             
             generateWorld();
-            generateAvatars();
             
             if (airSound.downloaded) {
                 playAirSound();
             } else {
                 airSound.ready.connect(onSoundReady);
             }
+            
+            generateAvatars();
         }
     };    
 
@@ -82,10 +85,20 @@
             "volume": AIR_SOUND_VOLUME
         });
     }
-
+    
+    function preloadAvatars() {
+        var avatarBookmarkList = AvatarBookmarks.getBookmarks();
+        var avatarPrefetch = [];
+        var i = 0;
+        for (var bookmarkName in avatarBookmarkList) {
+            avatarPrefetch[i] = ModelCache.prefetch(avatarBookmarkList[bookmarkName].avatarUrl);
+            i++;
+        }
+    }
+    
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-120");
+        print("GEN-VERSION-130");
         var avatars = [];
         var i = 0;
         var avatar;

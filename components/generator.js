@@ -129,7 +129,7 @@
                 "visible": false                
             }, "domain");
             
-            sleep(1000);
+            //sleep(1000);
             
             var properties = Entities.getEntityProperties(id, ["naturalDimensions"]);
             

@@ -55,5 +55,17 @@
         Audio.playSound(teleportSound, { volume: 0.3, localOnly: true });
     };    
     
+    function preloadAvatars() {
+        var avatarBookmarkList = AvatarBookmarks.getBookmarks();
+        var avatarPrefetch = [];
+        var i = 0;
+        for (var bookmarkName in avatarBookmarkList) {
+            avatarPrefetch[i] = ModelCache.prefetch(avatarBookmarkList[bookmarkName].avatarUrl);
+            i++;
+        }
+    }
+    
     Script.scriptEnding.connect(cleanup);
+    preloadAvatars();    
+    
 }());

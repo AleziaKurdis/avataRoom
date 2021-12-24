@@ -90,7 +90,7 @@
         
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-290");
+        print("GEN-VERSION-295");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -115,7 +115,7 @@
         
         for (i = 0; i < avatars.length; i++ ) {
             var currentAngle = i * angle;
-            var rotation = Quat.fromVec3Radians({"x": 0, "y": currentAngle, "z": 0});
+            var rotation = Quat.fromVec3Radians({"x": 0, "y": currentAngle + (Math.PI/2), "z": 0});
             var position = {"x": positionZero.x - (Math.cos(currentAngle) * radius), "y": positionZero.y, "z": positionZero.z + (Math.sin(currentAngle) * radius)};
             
             var id = Entities.addEntity({

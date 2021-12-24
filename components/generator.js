@@ -68,8 +68,7 @@
             } else {
                 airSound.ready.connect(onSoundReady);
             }
-            
-            sleep(2000);
+
             generateAvatars();
         }
     };    
@@ -99,7 +98,7 @@
     
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-130");
+        print("GEN-VERSION-140");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -143,7 +142,7 @@
                 "visible": false                
             }, "domain");
             
-            //sleep(1000);
+            sleep(2000);
             
             var properties = Entities.getEntityProperties(id, ["naturalDimensions"]);
             

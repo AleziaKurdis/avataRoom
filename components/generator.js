@@ -90,7 +90,7 @@
         
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-210");
+        print("GEN-VERSION-220");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -286,7 +286,7 @@
                     "rotation": buildingRotation,
                     "useOriginalPivot": true
                 }, "domain");
-                    
+        }
     }
 /*    
     function getPlacesContent(apiUrl) {

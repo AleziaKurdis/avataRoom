@@ -90,7 +90,7 @@
         
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-200");
+        print("GEN-VERSION-210");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -130,7 +130,7 @@
                 "shapeType": "none",
                 //"script": ROOT + "areas/area_" + placeArea + ".js",
                 "modelURL": avatars[i].url,
-                "useOriginalPivot": true,
+                "useOriginalPivot": false,
                 "visible": false                
             }, "domain");
             
@@ -181,7 +181,112 @@
     }
 
     function generateWorld() {
+        var d = new Date();
+        var n = d.getTime();
         
+        var sunOrientation = (n % 68400000) * 2 * Math.PI;
+        
+        var skyZoneId = Entities.addEntity({
+            "type": "Zone",
+            "name": "SKY",
+            "locked": true,
+            "dimensions": {
+                "x": 10000,
+                "y": 2000,
+                "z": 10000
+            },
+            "grab": {
+                "grabbable": false
+            },
+            "shapeType": "box",
+            "keyLight": {
+                "color": {
+                    "red": 255,
+                    "green": 244,
+                    "blue": 199
+                },
+                "intensity": 3,
+                "direction": {
+                    "x": 0.0013233129866421223,
+                    "y": -0.5563610196113586,
+                    "z": -0.8309397101402283
+                },
+                "castShadows": true,
+                "shadowBias": 0.02,
+                "shadowMaxDistance": 60
+            },
+            "ambientLight": {
+                "ambientIntensity": 0.6,
+                "ambientURL": hecateSkyUrl
+            },
+            "skybox": {
+                "color": {
+                    "red": 255,
+                    "green": 255,
+                    "blue": 255
+                },
+                "url": hecateSkyUrl
+            },
+            "haze": {
+                "hazeRange": 1000,
+                "hazeColor": {
+                    "red": 227,
+                    "green": 187,
+                    "blue": 138
+                },
+                "hazeGlareColor": {
+                    "red": 255,
+                    "green": 202,
+                    "blue": 87
+                },
+                "hazeEnableGlare": true,
+                "hazeGlareAngle": 30,
+                "hazeAltitudeEffect": true,
+                "hazeCeiling": -30,
+                "hazeBaseRef": -250
+            },
+            "bloom": {
+                "bloomIntensity": 0.5
+            },
+            "keyLightMode": "enabled",
+            "ambientLightMode": "enabled",
+            "skyboxMode": "enabled",
+            "hazeMode": "enabled",
+            "bloomMode": "enabled",
+            "position": positionZero,
+            "rotation": Quat.fromVec3Radians( {"x": 0.0, "y": sunOrientation, "z": 0.0} )
+        }, "domain");
+        
+        //Buildings
+        var nbrBuidling = Math.floor(Math.random() * 17) + 3;
+        for (i=0; i < nbrBuidling; i++) {
+            
+            var buildingRotation = Quat.fromVec3Radians( {"x": 0.0, "y": (Math.random() * 2 * Math.PI), "z": 0.0} );
+            
+            var distance = Math.floor(Math.random() * 8000) + 600;
+            var directionRad = Math.random() * 2 * Math.PI;
+            var relativeBuidlingPosition = {"x": distance * Math.cos(directionRad), "y": (Math.floor(Math.random() * 600) - 350), "z": distance * Math.sin(directionRad)};
+            var buildingPosition = Vec3.sum(positionZero, relativeBuidlingPosition);
+            
+            var buildingId = Entities.addEntity({
+                    "type": "Model",
+                    "locked": true,
+                    "name": "BUIDING-" + i,
+                    "dimensions": {
+                        "x": 328.3628845214844,
+                        "y": 1978.876220703125,
+                        "z": 313.246826171875
+                    },
+                    "grab": {
+                        "grabbable": false
+                    },
+                    "shapeType": "static-mesh",
+                    "modelURL": hecateBuildingdModelUrl,
+                    "position": buildingPosition,
+                    "rotation": buildingRotation,
+                    "useOriginalPivot": true
+                }, "domain");
+                    
     }
 /*    
     function getPlacesContent(apiUrl) {

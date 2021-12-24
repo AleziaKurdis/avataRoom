@@ -90,7 +90,7 @@
         
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-220");
+        print("GEN-VERSION-240");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -242,8 +242,8 @@
                 "hazeEnableGlare": true,
                 "hazeGlareAngle": 30,
                 "hazeAltitudeEffect": true,
-                "hazeCeiling": -30,
-                "hazeBaseRef": -250
+                "hazeCeiling": 3970,
+                "hazeBaseRef": 3750
             },
             "bloom": {
                 "bloomIntensity": 0.5

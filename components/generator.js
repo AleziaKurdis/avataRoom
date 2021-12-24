@@ -37,7 +37,10 @@
     var installImageUrl = ROOT + "install.jpg";
     var thisEntity = Uuid.NULL;
     var positionZero;
-    
+    var avatarModelEntityIDs = [];
+    var avatarModelLoaded = [];
+    var processAvatar = 0;
+    var stillSomeToLoad = false;
     
     //var placeHistorySettingValue;
     //var placeHistorySettingName = "3D_GOTO_PLACES_HISTORY";
@@ -53,8 +56,6 @@
     this.preload = function(entityID) {
         if (location.protocol.substr(0, 4) === "http") {
             thisEntity = entityID;
-            
-            preloadAvatars();
             
             airSound = SoundCache.getSound(hecateAirSoundUrl);
             
@@ -85,20 +86,10 @@
             "volume": AIR_SOUND_VOLUME
         });
     }
-    
-    function preloadAvatars() {
-        var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        var avatarPrefetch = [];
-        var i = 0;
-        for (var bookmarkName in avatarBookmarkList) {
-            avatarPrefetch[i] = ModelCache.prefetch(avatarBookmarkList[bookmarkName].avatarUrl);
-            i++;
-        }
-    }
-    
+        
     function generateAvatars() { 
         var avatarBookmarkList = AvatarBookmarks.getBookmarks();
-        print("GEN-VERSION-150");
+        print("GEN-VERSION-170");
         var avatars = [];
         var i = 0;
         var avatar;
@@ -141,20 +132,42 @@
                 "useOriginalPivot": true,
                 "visible": false                
             }, "domain");
-            print("LOADED BEFORE: " + Entities.isLoaded(id));
-            sleep(2000);
-            print("LOADED AFTER: " + Entities.isLoaded(id));
-            var properties = Entities.getEntityProperties(id, ["naturalDimensions"]);
             
-            Entities.editEntity(id, {
-                "dimensions": Vec3.multiply( avatars[i].scale, properties.naturalDimensions ),
-                "locked": true,
-                "visible": true
-            });
-            
+            avatarModelEntityIDs.push(id);
+            avatarModelLoaded.push(false);
+
         }
         
+        Script.update.connect(myTimer);
         
+    }
+
+    function myTimer(deltaTime) {
+        if (!avatarModelLoaded[processAvatar]) {
+            if (Entities.isLoaded(avatarModelEntityIDs[processAvatar]) {
+                avatarModelLoaded[processAvatar] = true;
+
+                var properties = Entities.getEntityProperties(avatarModelEntityIDs[processAvatar], ["naturalDimensions"]);
+                
+                Entities.editEntity(avatarModelEntityIDs[processAvatar], {
+                    "dimensions": Vec3.multiply( avatars[i].scale, properties.naturalDimensions ),
+                    "locked": true,
+                    "visible": true
+                }); 
+
+            } else {
+                stillSomeToLoad = true;
+            }
+        }
+        processAvatar++;
+        if (processAvatar === avatarModelEntityIDs.length) {
+            processAvatar = 0;
+            if (!stillSomeToLoad) {
+                Script.update.disconnect(myTimer);
+            } else {
+                stillSomeToLoad = false;
+            }
+        }
     }
 
     function sleep(milliseconds) {
